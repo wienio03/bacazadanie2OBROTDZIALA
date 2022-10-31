@@ -3,7 +3,7 @@ using namespace std;
 #include <iostream>
 // VARIABLES
 int  elementIndex, sessions, shift, invIndex, shiftIndex, switchIndex;
-unsigned int length, invLength, shiftLength, switchLength;
+int length, invLength, shiftLength, switchLength;
 char operation;
 // MAIN
 int main() {
@@ -26,38 +26,42 @@ int main() {
         }
 
         cout << endl;
-        cout << "Podaj indeks elementu:";
-        cin >> elementIndex;
-        if (elementIndex != length) elementIndex = elementIndex % length;
-        else elementIndex = 0;
-        cout << tab[elementIndex] << endl;
-        cout << "Podaj indeks operacji (R lub C lub S)";
-        // ---OPERATIONS---
-        while (int k = 0 < 1) {
-            //INVERT
-            if (operation == 'R') {
-                cin >> elementIndex >> invLength;
-
-
+        cout << "Podaj parametry obrotu:";
+        cin >> elementIndex >> invLength;
+        int b=0;
+        while ( b < (length/invLength)){
+            if (elementIndex!=length) elementIndex=elementIndex%length;
+            else elementIndex=0;
+            int flIndex = elementIndex + invLength-1;
+            if (flIndex!=length) flIndex = flIndex%length;
+            else flIndex=0;
+            int k = elementIndex;
+            int n = flIndex;
+            int m =0;
+            while (m < (invLength/2)){
+                if (k!=length) k=k%length;
+                else k=0;
+                if (n!=length) n=n%length;
+                else n=0;
+                swap(tab[k],tab[n]);
+                k++;
+                n--;
+                m++;
             }
-            //SHIFT
-            if (operation == 'C') {
-                cin >> elementIndex >> shiftLength >> shift;
 
-            }
-            //SWITCH
-            if (operation == 'S') {
-                cin >> elementIndex >> switchLength;
-            }
-            if (operation == 'F') goto label;
+            b++;
+            elementIndex=elementIndex+invLength;
         }
+
+
         i++;
-        label:
-        //BEFORE OPERATIONS
-        cout <<
-        //AFTER OPERATIONS
-        cout <<
+        j = 0;
+        while (j < length) {
+            cout << tab[j] << " ";
+            j++;
+        }
     }
+
     return 0;
 
 }
